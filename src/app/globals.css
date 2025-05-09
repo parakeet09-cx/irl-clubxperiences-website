@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@tailwind utilities;
 
 :root {
   --background: #ffffff;
@@ -19,8 +20,37 @@
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
 }
+
+/* Intro overlay fade: 3s display + 1s fade */
+@keyframes overlayFade {
+  0%, 75% { opacity: 1; }
+  100%    { opacity: 0; pointer-events: none; }
+}
+.intro-overlay {
+  animation: overlayFade 4s ease-out forwards;
+}
+
+/* Letter-by-letter fade-in */
+@keyframes letterFadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-letter {
+  animation: letterFadeIn 0.5s ease-out forwards;
+}
+
+/* Slide-in animations (3s delay baked in) */
+@keyframes slideInFromLeft { from {transform: translateX(-100%); opacity:0;} to {transform: translateX(0); opacity:1;} }
+@keyframes slideInFromRight{ from {transform: translateX(100%); opacity:0;}  to {transform: translateX(0); opacity:1;} }
+@keyframes slideInFromTop  { from {transform: translateY(-100%); opacity:0;} to {transform: translateY(0); opacity:1;} }
+@keyframes slideInFromBottom{from {transform: translateY(100%); opacity:0;} to {transform: translateY(0); opacity:1;} }
+
+.animate-slide-in-left   { animation: slideInFromLeft   1s ease-out 3s forwards; }
+.animate-slide-in-right  { animation: slideInFromRight  1s ease-out 3s forwards; }
+.animate-slide-in-top    { animation: slideInFromTop    1s ease-out 3s forwards; }
+.animate-slide-in-bottom { animation: slideInFromBottom 1s ease-out 3s forwards; }
